@@ -3,8 +3,10 @@
 const API_KEY = 'api_key=c06243e58c51fb3bd88147750a95e9d8'; //Api klucz z tmdb
 const base_url = 'https://api.themoviedb.org/3';
 const discover_url = base_url+'/discover/movie?sort_by=popularity.desc&'+API_KEY; //Link do database'u z filmami
+const searchURL = base_url+'/search/movie?'+API_KEY;
 
 const main = document.getElementById('main'); // Tam gdzie wszystkie divy z filmami zostaną wysłane.
+
 
 getmovies(discover_url);
 function getmovies(url)
@@ -18,6 +20,7 @@ function showmovies(data)
     main.innerHTML = '';
 data.forEach(movie =>{ //(przed tem niewiedzialem co to, ale) za kazde miejsce w arrayu, powtarza sie ten kod, odrazu jest strzalkowa z movie:
     const {title, poster_path, vote_average, overview} = movie;
+    //console.log(data);
     const movieEl = document.createElement('div'); //Tworzenie elementow w HTMLu
     movieEl.classList.add('movie'); //dodaje cssa do nowego elementu.
     movieEl.innerHTML = `
@@ -35,7 +38,8 @@ data.forEach(movie =>{ //(przed tem niewiedzialem co to, ale) za kazde miejsce w
 
 }
 )
-}
+};
+
 function getColor(vote) //self explanatory
 {
     if(vote >= 3)
@@ -47,3 +51,15 @@ function getColor(vote) //self explanatory
         return 'red' 
     }
 }
+
+form.addEventListener('submit', (e) => { //dodaje mozliwosc wyszukiwania filmow z calej bazy danych
+    e.preventDefault();
+
+    const searchTerm = search.value;
+
+    if(searchTerm){
+        getmovies(searchURL+'&query='+searchTerm) //pobiera z inputa slowo klucz i wysyla to do api
+    }else{
+        getmovies(discover_url) //wraca do glownej strony z najpopularniejszymi filmami
+    }
+});
