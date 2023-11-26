@@ -87,27 +87,32 @@ main
 }
 .movieinfo span.green
 {
-    color:green;
+    color:rgb(0, 255, 0);
+}
+.movieinfo span.orange
+{
+    color:rgb(250, 208, 130)
 }
 .movieinfo span.red
 {
-    color:red;
+    color:rgb(247, 46, 46);
 }
 .overview{
     position:absolute;
     left:0;
     right:0;
     bottom:0;
-    background-color: white;
+    background-color: rgb(56, 0, 82);
     padding: 1rem;
     max-height:100%;
     transform: translateY(101%);
     transition:transform 0.3s ease-in;
+    color:white;
 }
 .movie:hover .overview{
     transform:translateY(0);
 }
-h2
+#header
 {
 
     float:left;
@@ -115,6 +120,21 @@ h2
     font-weight: bold;
     color:orange;
     top:0;
+    padding: 0;
+    border: none;
+    background: none;
+    height:30px;
+    width:70px;
+    font-size: 30;
     
  
+}
+#header:hover
+{
+    color:lightyellow;
+}
+h6
+{
+    color:rgb(145, 74, 49);
+    margin:5px;
 }
