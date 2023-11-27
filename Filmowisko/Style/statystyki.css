@@ -1,0 +1,27 @@
+.StatHeader
+{
+    color:orange;
+}
+.aktorcell
+{
+    width:300px;
+
+    border-radius:3px;
+    background-color: var(--secondary-color);
+    position:relative;
+    overflow:hidden;
+    text-align:center;
+    margin:auto;
+        
+}
+.Stats
+{
+    display:flex;
+    justify-content: center;
+}
+
+h3
+{
+    margin:30px;
+    text-align:center;
+}
