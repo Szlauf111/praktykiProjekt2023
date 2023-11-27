@@ -5,7 +5,87 @@ const base_url = 'https://api.themoviedb.org/3';
 const discover_url = base_url+'/discover/movie?sort_by=popularity.desc&'+API_KEY; //Link do database'u z filmami
 const searchURL = base_url+'/search/movie?'+API_KEY;
 
+const genres = [
+    {
+      "id": 28,
+      "name": "Action"
+    },
+    {
+      "id": 12,
+      "name": "Adventure"
+    },
+    {
+      "id": 16,
+      "name": "Animation"
+    },
+    {
+      "id": 35,
+      "name": "Comedy"
+    },
+    {
+      "id": 80,
+      "name": "Crime"
+    },
+    {
+      "id": 99,
+      "name": "Documentary"
+    },
+    {
+      "id": 18,
+      "name": "Drama"
+    },
+    {
+      "id": 10751,
+      "name": "Family"
+    },
+    {
+      "id": 14,
+      "name": "Fantasy"
+    },
+    {
+      "id": 36,
+      "name": "History"
+    },
+    {
+      "id": 27,
+      "name": "Horror"
+    },
+    {
+      "id": 10402,
+      "name": "Music"
+    },
+    {
+      "id": 9648,
+      "name": "Mystery"
+    },
+    {
+      "id": 10749,
+      "name": "Romance"
+    },
+    {
+      "id": 878,
+      "name": "Science Fiction"
+    },
+    {
+      "id": 10770,
+      "name": "TV Movie"
+    },
+    {
+      "id": 53,
+      "name": "Thriller"
+    },
+    {
+      "id": 10752,
+      "name": "War"
+    },
+    {
+      "id": 37,
+      "name": "Western"
+    }
+  ]
+
 const main = document.getElementById('main'); // Tam gdzie wszystkie divy z filmami zostaną wysłane.
+const tagsEl = document.getElementById('tags'); 
 
 getmovies(discover_url);
 
@@ -100,3 +180,17 @@ function shortenText(text) {
         return "h4";
     }
   }
+
+  setGenre();
+function setGenre(){
+    tagsEl.innerHTML='';
+    genres.forEach(genre =>{ 
+        const t = document.createElement('div');
+        t.classList.add('tag');
+        t.id=genre.id;
+        t.innerText = genre.name;
+        t.addEventListener('click', () =>{
+        })
+        tagsEl.append(t);
+    })
+}
