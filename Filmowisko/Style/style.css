@@ -157,3 +157,7 @@ h6
     display: inline-block;
     cursor: pointer;
 }
+
+.tag.highlight{
+    background-color: red;
+}
