@@ -251,6 +251,7 @@ function highlightSelection() {
     if(selectedGenre.lenght !=0){
       selectedGenre.forEach(id => {
           const hightlightedTag = document.getElementById(id)
+            hightlightedTag.classList.add('highlight');
       }
         )
     }
