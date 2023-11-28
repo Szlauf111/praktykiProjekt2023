@@ -1,5 +1,3 @@
-// Jako pierwsze co powiem to to, że do Js'a używałem tutorialu od jakiegoś (chyba miłego) typa z potężnym indiańskim akcentem. Pozdrawiam sprawdzającego.
-
 const API_KEY = 'api_key=c06243e58c51fb3bd88147750a95e9d8'; //Api klucz z tmdb
 const base_url = 'https://api.themoviedb.org/3';
 const discover_url = base_url+'/discover/movie?sort_by=popularity.desc&'+API_KEY; //Link do database'u z filmami
@@ -87,66 +85,6 @@ const main = document.getElementById('main'); // Tam gdzie wszystkie divy z film
 const tagsEl = document.getElementById('tags');
 let Sort = 0; 
 
-getmovies(discover_url,Sort);
-
-function getmovies(url,Sort)
-{
-fetch(url).then(res => res.json()).then(data => { //Bierze filmy z database'u w postaciu arraya
-          if(Sort == 1)
-          {
-            const sortedarr = data.results.sort((a, b) => new Date(b.release_date) - new Date(a.release_date));
-            showmovies(sortedarr);
-          }
-          else if(Sort == 2)
-          {
-            const sortedarr = data.results.sort((a, b) => new Date(a.release_date) - new Date(b.release_date));
-            showmovies(sortedarr);
-          }
-          else
-          {
-          showmovies(data.results); 
-          }
-    
-})
-}
-
-function showmovies(data)
-{
-    main.innerHTML = '';
-    data.forEach(movie =>{
-    const {title, poster_path, vote_average, overview, id,release_date,vote_count,genre_ids} = movie;
-    //console.log(data);
-    const movieEl = document.createElement('div'); //Tworzenie elementow w HTMLu
-    movieEl.classList.add('movie'); //dodaje cssa do nowego elementu.
-    movieEl.innerHTML = `
-    <img src="https://image.tmdb.org/t/p/w500/${poster_path}" alt="${title}">
-    <div class="movieinfo">
-        <${GetHeader(title)}>${title}   </${GetHeader(title)}>
-        
-        <span class="${getColor(vote_average)}">${Math.round(vote_average* 10)/10}</span>
-       
-    </div>
-
-    <h6>Release Date: ${release_date}
-    </h6>
- 
-    <div class="overview">
-    <h4>${title}   </h4>
-   Rating: ${Math.round(vote_average* 10)/10} | Vote Count: ${vote_count}<br>
-    <br>
-    ${shortenText(overview)}<br>
-    <a href="https://www.themoviedb.org/movie/${id}">Zobacz na TMDB</a><br>
-    <h6>${getGenre(genre_ids)}</h6>
-    
-    </div>
-    
-    `
-
-    main.appendChild(movieEl); //Wysyla element MovieEl do elementu main
-
-}
-)
-};
 function getGenre(arrgenr)
 {
   let arr = "";
@@ -174,16 +112,108 @@ function getColor(vote) //self explanatory
     }
 }
 
+getmovies(discover_url,Sort);
+function getmovies(url,Sort)
+{
+fetch(url).then(res => res.json()).then(data => { //Bierze filmy z database'u w postaciu arraya
+          if(Sort == 1)
+          {
+            const sortedarr = data.results.sort((a, b) => new Date(b.release_date) - new Date(a.release_date));
+            showmovies(sortedarr);
+          }
+          else if(Sort == 2)
+          {
+            const sortedarr = data.results.sort((a, b) => new Date(a.release_date) - new Date(b.release_date));
+            showmovies(sortedarr);
+          }
+          else
+          {
+          showmovies(data.results); 
+          }
+    
+})
+}
+
+function showmovies(data)
+{
+    main.innerHTML = '';
+    data.forEach(movie =>{
+    const {title, poster_path, vote_average, overview, id,release_date,vote_count,genre_ids} = movie;
+    //console.log(data);
+    const filmelement = document.createElement('div'); //Tworzenie elementow w HTMLu
+    filmelement.classList.add('movie'); //dodaje cssa do nowego elementu.
+    filmelement.innerHTML = `
+    <img src="https://image.tmdb.org/t/p/w500/${poster_path}" alt="${title}">
+    <div class="movieinfo">
+        <${GetHeader(title)}>${title}   </${GetHeader(title)}>
+        
+        <span class="${getColor(vote_average)}">${Math.round(vote_average* 10)/10}</span>
+       
+    </div>
+
+    <h6>Release Date: ${release_date}
+    </h6>
+    <div class="opis">
+
+   Rating: ${Math.round(vote_average* 10)/10} | Vote Count: ${vote_count}<br>
+    <br>
+    ${shortenText(overview)}<br>
+    <a href="https://www.themoviedb.org/movie/${id}">Check out TMDB</a><br>
+    <h6>${getGenre(genre_ids)}</h6><br>
+    <div class="Ratings">
+
+    <button class="btn btn-warning"  onclick="AddRating(${id})">Submit</button>
+    <input type="number" class="RatingInput" id="Rate${id}" min="0" max="10">
+ 
+      </div>
+
+
+    </div>
+ 
+    
+    `
+//
+    main.appendChild(filmelement); //Wysyla element filmelement do elementu main
+
+}
+)
+};
+
+function AddRating(id)
+{
+let rating = document.getElementById("Rate"+id).value;
+if(rating <= 10 && rating > 0)
+{
+  const options = {
+    method: 'POST',
+    headers: {
+      accept: 'application/json',
+      'Content-Type': 'application/json;charset=utf-8',
+      Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjMDYyNDNlNThjNTFmYjNiZDg4MTQ3NzUwYTk1ZTlkOCIsInN1YiI6IjY1NjBmNmMxN2RmZGE2MDBhYzIyMjcxMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.98b22oUvIVEwIC-WmPD6yZxF_1FncvAvf4P9tk0U1hw'
+    },
+    body: JSON.stringify({ value: rating })
+  };
+
+fetch("https://api.themoviedb.org/3/movie/"+id+"/rating", options)
+.then(response => response.json())
+.then(response => {console.log(response);alert("Wystawiono ocenę pomyślnie!")})
+.catch(err => console.error(err));
+}
+else
+{
+  alert("Wprowadzona ocena nie jest poprawna. Proszę podać ocenę w zakresie od 1 do 10.")
+}
+}
 form.addEventListener('submit', (e) => { //dodaje mozliwosc wyszukiwania filmow z calej bazy danych
-    e.preventDefault();
+  e.preventDefault();
 
-    const searchTerm = search.value;
+  const searchTerm = search.value;
 
-    if(searchTerm){
-        getmovies(searchURL+'&query='+searchTerm,Sort) //pobiera z inputa slowo klucz i wysyla to do api
-    }else{
-        getmovies(discover_url,Sort) //wraca do glownej strony z najpopularniejszymi filmami
-    }
+  if(searchTerm){
+      getmovies(searchURL+'&query='+searchTerm,Sort) //pobiera z inputa slowo klucz i wysyla to do api
+  }else{
+      getmovies(discover_url,Sort) //wraca do glownej strony z najpopularniejszymi filmami
+  }
 });
 
 function reloadsite()
@@ -209,8 +239,7 @@ function shortenText(text) {
         return "h4";
     }
   }
-
-var selectedGenre = []
+  var selectedGenre = []
   setGenre();
 function setGenre(){
     tagsEl.innerHTML='';
@@ -221,7 +250,7 @@ function setGenre(){
         t.innerText = genre.name;
 
         t.addEventListener('click', () =>{
-          if(selectedGenre.lenght == 0){
+          if(selectedGenre.length == 0){
               selectedGenre.push(genre.id);
           }
           else{
@@ -236,7 +265,7 @@ function setGenre(){
             }
           }
           console.log(selectedGenre)
-          getmovies(API_KEY + '&with_genres=' + encodeURI(selectedGenre.join(',')))
+          getmovies(discover_url + '&with_genres=' + encodeURI(selectedGenre.join(',')))
           highlightSelection()
         })
         tagsEl.append(t);
@@ -248,30 +277,11 @@ function highlightSelection() {
     tags.forEach(tag => {
         tag.classList.remove('highlight')
     })
-    if(selectedGenre.lenght !=0){
+    if(selectedGenre.length !=0){
       selectedGenre.forEach(id => {
           const hightlightedTag = document.getElementById(id)
-            hightlightedTag.classList.add('highlight');
+          hightlightedTag.classList.add('highlight');
       }
         )
     }
-}
-function TurnOnSortyear()
-{
-Sort++;
-if(Sort == 1)
-{
-  document.getElementById("SortButton").classList.remove('btn','btn-info');
-  document.getElementById("SortButton").classList.add('btn','btn-success');
-}
-if(Sort == 2)
-{
-  document.getElementById("SortButton").classList.add('btn','btn-danger');
-  document.getElementById("SortButton").classList.remove('btn','btn-success');
-}
-if(Sort == 3){
-  document.getElementById("SortButton").classList.add('btn','btn-info');
-  document.getElementById("SortButton").classList.remove('btn','btn-danger');
-  Sort = 0;
-}
 }

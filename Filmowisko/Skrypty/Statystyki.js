@@ -22,7 +22,7 @@ function generujstaty(data,type)
     var Miejsce = 1;
     if(type == "actor")
     {
-    data.forEach(aktor =>{ //(przed tem niewiedzialem co to, ale) za kazde miejsce w arrayu, powtarza sie ten kod, odrazu jest strzalkowa z movie:
+    data.forEach(aktor =>{ 
         const {name} = aktor;
         const aktorEl = document.createElement('div'); //Tworzenie elementow w HTMLu
         aktorEl.classList.add('aktorcell');
@@ -39,16 +39,16 @@ function generujstaty(data,type)
 }
 else if(type=="movie")
 {
-    data.forEach(movie =>{ //(przed tem niewiedzialem co to, ale) za kazde miejsce w arrayu, powtarza sie ten kod, odrazu jest strzalkowa z movie:
+    data.forEach(movie =>{
         const {title} = movie;
-        const movieel = document.createElement('div'); //Tworzenie elementow w HTMLu
-        movieel.classList.add('aktorcell');
-        movieel.innerHTML = `
+        const filmel = document.createElement('div'); //Tworzenie elementow w HTMLu
+        filmel.classList.add('aktorcell');
+        filmel.innerHTML = `
         <br>
         <p class="StatHeader">${Miejsce}: ${title}</p><img src="">
         
         `
-    movies.appendChild(movieel);
+    movies.appendChild(filmel);
     
     Miejsce++;
     }
