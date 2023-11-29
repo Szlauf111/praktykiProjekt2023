@@ -57,5 +57,5 @@ else if(type=="movie")
     };
     function gotomain()
 {
-    location.href="index.html";
+    location.href="../index.html";
 }

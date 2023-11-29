@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dodawanie</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="../Style/style.css">
+    <link rel="stylesheet" href="../Style/dodawanie.css">
+    <script src="../Skrypty/dodawanie.js"></script>
+</head>
+<body>
+    <header>
+        <button id="header" onclick="gotomain()">FILMOWISKO</button>
+    </header>
+    <footer>
+        <div id="lewo">
+            Podaj tytuł filmu <input type="text" name="title" id="title"> <br>
+            Podaj opis filmu <input type="text" name="opis" id="opis"> <br>
+            Podaj date premiery filmu <input type="text" name="data" id="data"> <br>
+            Podaj gatunek filmu <input type="text" name="gatunek" id="gatunek"> <br>
+            Podaj głównych aktorów <input type="text" name="actors" id="actors"> <br>
+            <button type="button" onclick="dodaj()">Dodaj film</button>
+        </div>
+        <div id="center">
+            <p id="wynik"></p>
+        </div>
+    </footer>
+</body>
+</html>

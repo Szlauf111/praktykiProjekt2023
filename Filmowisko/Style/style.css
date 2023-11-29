@@ -120,7 +120,7 @@ span.red
     border: none;
     background: none;
     height:30px;
-    width:70px;
+    width:200px;
     font-size: 30;
     
  
@@ -137,21 +137,32 @@ h6
 
 #tags{
     width: 80%;
-    display: flex;
+    
     flex-wrap: wrap;
     justify-content: center;    
     align-items: center;
     margin: 10px auto;
 }
+.undropped
+{
+    display:none;
+}
+.dropped
+{
+    display:flex;
+}
 
 .tag{
     color: white;
-    padding: 10px 20px;
-    background-color: orange;
+    background:none;
     border-radius: 50px;
-    margin: 5px;
+    margin: 4px;
     display: inline-block;
     cursor: pointer;
+}
+.tag:hover
+{
+    color:orange;
 }
 .opis
 {
@@ -168,5 +179,5 @@ h6
     background:var(--secondary-color);
 }
 .tag.highlight{
-    background-color: red;
+    color: red;
 }

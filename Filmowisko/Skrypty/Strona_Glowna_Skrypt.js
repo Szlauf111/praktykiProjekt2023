@@ -250,7 +250,7 @@ function setGenre(){
         t.innerText = genre.name;
 
         t.addEventListener('click', () =>{
-          if(selectedGenre.length == 0){
+          if(selectedGenre.lenght == 0){
               selectedGenre.push(genre.id);
           }
           else{
@@ -264,8 +264,8 @@ function setGenre(){
                 selectedGenre.push(genre.id);
             }
           }
-          console.log(selectedGenre)
-          getmovies(discover_url + '&with_genres=' + encodeURI(selectedGenre.join(',')))
+          console.log(selectedGenre);
+          getmovies( discover_url + '&with_genres=' + encodeURI(selectedGenre.join(',')))
           highlightSelection()
         })
         tagsEl.append(t);
@@ -277,9 +277,10 @@ function highlightSelection() {
     tags.forEach(tag => {
         tag.classList.remove('highlight')
     })
-    if(selectedGenre.length !=0){
+
+    if(selectedGenre.lenght !=0){
       selectedGenre.forEach(id => {
-          const hightlightedTag = document.getElementById(id)
+          const hightlightedTag = document.getElementById(id);
           hightlightedTag.classList.add('highlight');
       }
         )

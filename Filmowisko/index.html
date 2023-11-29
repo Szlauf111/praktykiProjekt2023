@@ -10,16 +10,18 @@
     <body>
 
         <header>
-            <div id="tags">
+            <div id="tags" class="undropped">
 
             </div>
             <button id="header" onclick="reloadsite()">FILMOWISKO</button>
+            <button class="btn btn-outline-warning" style="height:40px" onclick="dropgatunki()"><b>Gatunki</b></button>
+            <a href="Pages/Statystyki.html" class="btn btn-outline-warning">Statystyki</a>
+            <a href="Pages/Dodawanie.html" class="btn btn-outline-warning">Dodaj swój film</a>
             <form id="form">
-                <a href="Statystyki.html">Statystyki</a>
                 <input type="text" id="search" placeholder="np. 'Fight Club'">  
-                <button type="submit" class="btn btn-primary" style="height:40px"><b>Szukaj</b></button>
-                <button onclick="TurnOnSortyear()" class="btn btn-info" id="SortButton" style="height:40px"><b>Sort By Year</b></button>
-                
+                <button type="submit" class="btn btn-outline-warning" style="height:40px"><b>Szukaj</b></button>
+                <button onclick="TurnOnSortyear()" class="btn btn-warning" id="SortButton" style="height:40px"><b>Sort By Year</b></button>
+
                 </form>
                
         </header>

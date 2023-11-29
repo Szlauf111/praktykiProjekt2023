@@ -26,10 +26,10 @@ const dodaj =()=> {
     Gatunek: ${movies[3]}
     Aktorzy: ${movies[4]}
     `);
-    location.href = 'index.html';
+    location.href = '../index.html';
   }
 
   function gotomain()
   {
-      location.href="index.html";
+      location.href="../index.html";
   }
