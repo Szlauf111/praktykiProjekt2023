@@ -1,3 +1,5 @@
+//let message: string = 'Hello world';
+
 const API_KEY = 'api_key=c06243e58c51fb3bd88147750a95e9d8'; //Api klucz z tmdb
 const base_url = 'https://api.themoviedb.org/3';
 const discover_url = base_url+'/discover/movie?sort_by=popularity.desc&'+API_KEY; //Link do database'u z filmami
